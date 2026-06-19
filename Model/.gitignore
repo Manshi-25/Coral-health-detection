@@ -6,3 +6,7 @@ start.sh
 
 all_models/best_cnn_model.h5
 all_models/best_resnet50_model.h5
+
+data/
+*.tar.gz
+*.zip
