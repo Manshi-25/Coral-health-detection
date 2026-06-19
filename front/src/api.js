@@ -1,4 +1,4 @@
-const API_URL = ""; // Use your API URL
+const API_URL =  "https://coral-health-detection-model.onrender.com/predict";
 
 export const predictImage = async (imageFile, modelType) => {
     const formData = new FormData();
