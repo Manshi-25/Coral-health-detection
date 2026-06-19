@@ -12,14 +12,15 @@ logging.getLogger("pymongo").setLevel(logging.WARNING)
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
+port = int(os.environ.get("PORT", 10000))
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
 
 # Paths to the TensorFlow Lite models
-cnn_model_path = "C:\\newprograms\\All_Projects\\Corals_new\\Model\\all_models\\cnn_model_TFL.tflite"
-resnet_model_path = "C:\\newprograms\\All_Projects\\Corals_new\Model\\all_models\\resnet50_model_TFL.tflite"
-densenet_model_path = "C:\\newprograms\\All_Projects\\Corals_new\\Model\\all_models\\densenet_model_TFL.tflite"
-efficientNet_model_path ="C:\\newprograms\\All_Projects\\Corals_new\Model\\all_models\\models\\saved_model\\efficientnet_float32.tflite"
+cnn_model_path = "Model\all_models\cnn_model_TFL.tflite"
+resnet_model_path = "Model\all_models\resnet50_model_TFL.tflite"
+densenet_model_path = "Model\all_models\densenet_model_TFL.tflite"
+efficientNet_model_path ="Model\all_models\models\saved_model\efficientnet_float32.tflite"
 
 # Function to load TensorFlow Lite models
 def load_tflite_model(model_path):
@@ -132,14 +133,6 @@ def predict():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8000))
-    logging.info(f"Starting the server on port {port}...")
-    try:
-        from waitress import serve
-        serve(app, host="0.0.0.0", port=port)
-        logging.info(f"Server is running on http://0.0.0.0:{port}")
-    except Exception as e:
-        logging.error(f"Failed to start the server: {e}")
-        
+    app.run(host="0.0.0.0", port=port)
 
 
